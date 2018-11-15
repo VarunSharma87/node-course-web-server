@@ -28,6 +28,13 @@ hbs.registerHelper('capitalise', text => {
 // 	});
 // });
 
+app.get('/projects', (req, res) => {
+	res.render('projects.hbs', {
+		pageTitle: 'Projects'
+		headerTitle: 'Projects page'
+	})
+});
+
 app.get('/', (req, res) => {
 	res.render('home.hbs', {
 		pageTitle: 'Home',
