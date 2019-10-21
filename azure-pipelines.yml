@@ -30,8 +30,8 @@ steps:
     repositoryName: '$(Build.Repository.Name)'
     action: 'create'
     target: '$(Build.SourceVersion)'
-    tagSource: 'gitTag'
-    tagPattern: 'CopyTask'
+    tagSource: 'userSpecifiedTag'
+    tag: 'Copying files'
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
 
