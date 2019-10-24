@@ -48,6 +48,7 @@ steps:
       Write-Host "Copying translated files..."
       Copy-Item 'public' -Destination 'view' -Recurse -Force -Exclude $exclude
       
+      az login
       
       Write-Host "Pushing changes..."
       git add .
