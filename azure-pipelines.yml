@@ -35,3 +35,24 @@ steps:
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
 
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host "Adding files to staging"
+      $branchName = "translationBuild/$Env:BUILD_BUILDNUMBER"
+      git pull
+      git checkout -b $branchName
+      
+      $exclude = @('color.png', 'manifest.json', 'outline.png', 'src\KaizalaAggregationService\ActionResources\ActionPackages\out_of_box_checklist\teamsManifest\Local\strings.json')
+      Write-Host "Copying translated files..."
+      Copy-Item 'public' -Destination 'view' -Recurse -Force -Exclude $exclude
+      
+      
+      Write-Host "Pushing changes..."
+      git add .
+      git commit -m "Translation build to copy translations"
+      git push origin $branchName
+      
+      Write-Host "Raising a pull request"
+      az repos pr create --auto-complete true --delete-source-branch true --detect true --reviewers "isagga@microsoft.com" "varsharm@microsoft.com" -t "master" -s $branchName --description "Copyig translation strings from Local to Alpha, Preprod and Prod" --org "https://office.visualstudio.com/" -p "OC" -r "ActionsPlatform"
