@@ -47,6 +47,9 @@ steps:
       git pull
       git checkout -b $branchName
       
+      Write-Host "Trying to loging to azure..."
+      az login
+
       # $exclude = @('color.png', 'manifest.json', 'outline.png', 'src\KaizalaAggregationService\ActionResources\ActionPackages\out_of_box_checklist\teamsManifest\Local\strings.json')
       Write-Host "Copying translated files..."
       Copy-Item 'public' -Destination 'view' -Recurse -Force
