@@ -66,4 +66,4 @@ steps:
       # az login
 
       Write-Host "Raising a pull request"
-      az repos pr create --auto-complete true --delete-source-branch true --detect true --reviewers "isagga@microsoft.com" "varsharm@microsoft.com" -t "master" -s $branchName --description "Copyig translation strings from Local to Alpha, Preprod and Prod" --org "https://office.visualstudio.com/" -p "OC" -r "ActionsPlatform"
+      az repos pr create --auto-complete true --delete-source-branch true --detect true -t "master" -s $branchName --description "Copyig translation strings from Local to Alpha, Preprod and Prod" --org "https://dev.azure.com" -p "varunexploration" -r "varunexploration"
