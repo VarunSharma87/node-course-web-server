@@ -18,22 +18,22 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: 'public'
-    Contents: '**'
-    TargetFolder: 'views'
+# - task: CopyFiles@2
+#   inputs:
+#     SourceFolder: 'public'
+#     Contents: '**'
+#     TargetFolder: 'views'
 
-- task: GitHubRelease@1
-  inputs:
-    gitHubConnection: 'ExplorationTest'
-    repositoryName: '$(Build.Repository.Name)'
-    action: 'create'
-    target: '$(Build.SourceVersion)'
-    tagSource: 'userSpecifiedTag'
-    tag: '$(Build.BuildNumber)'
-    changeLogCompareToRelease: 'lastFullRelease'
-    changeLogType: 'commitBased'
+# - task: GitHubRelease@1
+#   inputs:
+#     gitHubConnection: 'ExplorationTest'
+#     repositoryName: '$(Build.Repository.Name)'
+#     action: 'create'
+#     target: '$(Build.SourceVersion)'
+#     tagSource: 'userSpecifiedTag'
+#     tag: '$(Build.BuildNumber)'
+#     changeLogCompareToRelease: 'lastFullRelease'
+#     changeLogType: 'commitBased'
 
 - checkout: self
   persistCredentials: true
@@ -47,10 +47,9 @@ steps:
       git pull
       git checkout -b $branchName
       
-      $exclude = @('color.png', 'manifest.json', 'outline.png', 'src\KaizalaAggregationService\ActionResources\ActionPackages\out_of_box_checklist\teamsManifest\Local\strings.json')
+      # $exclude = @('color.png', 'manifest.json', 'outline.png', 'src\KaizalaAggregationService\ActionResources\ActionPackages\out_of_box_checklist\teamsManifest\Local\strings.json')
       Write-Host "Copying translated files..."
-      Copy-Item 'public' -Destination 'view' -Recurse -Force -Exclude $exclude
-      
+      Copy-Item 'public' -Destination 'view' -Recurse -Force
       az login
       
       Write-Host "Pushing changes..."
