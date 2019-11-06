@@ -35,6 +35,9 @@ steps:
     changeLogCompareToRelease: 'lastFullRelease'
     changeLogType: 'commitBased'
 
+- checkout: self
+  persistCredentials: true
+
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
