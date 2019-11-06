@@ -52,9 +52,11 @@ steps:
       Copy-Item 'public' -Destination 'view' -Recurse -Force
       az login
       
-      Write-Host "Pushing changes..."
+      Write-Host "Adding changed files..."
       git add .
+      Write-Host "Commiting changed files..."
       git commit -m "Translation build to copy translations"
+      Write-Host "Pushing change..."
       git push origin $branchName
       
       Write-Host "Raising a pull request"
